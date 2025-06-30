@@ -14,7 +14,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import solutions.laxmi.lsnoti.LsSnackbarConfig
 import solutions.laxmi.lsnoti.LsSnackbarHost
+import solutions.laxmi.lsnoti.LsSnackbarPosition
+import solutions.laxmi.lsnoti.LsSnackbarType
 import solutions.laxmi.lsnoti.rememberLsSnackbarHostState
 import solutions.laxmi.sample.ui.theme.LsnotiTheme
 
@@ -23,19 +26,49 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             LsnotiTheme {
-                var showSnackbar by remember { mutableStateOf(false) }
-
-                val lsState = rememberLsSnackbarHostState()
-
-                LaunchedEffect(Unit) {
-                    lsState.show("Hello from LsNoti!")
-                }
+                val snackbarState = rememberLsSnackbarHostState()
 
                 Scaffold(
-                    snackbarHost = { LsSnackbarHost(state = lsState) }
-                ){i->
+                    snackbarHost = {
+                        LsSnackbarHost(
+                            state = snackbarState,
+                            maxStackHeightFraction = 0.7f
+                        )
+                    }
+                ) {i->
                     Box(modifier = Modifier.padding(i)){
-                        Text("Hello")
+                        Button(onClick = {
+                            snackbarState.show(
+                                "Operation completed Operation completed",
+                                LsSnackbarConfig(
+                                    type = LsSnackbarType.Info,
+                                    position = LsSnackbarPosition.TopEnd
+                                )
+                            )
+                            snackbarState.show(
+                                "Operation completed Operation completed",
+                                LsSnackbarConfig(
+                                    type = LsSnackbarType.Success,
+                                    position = LsSnackbarPosition.TopEnd
+                                )
+                            )
+                            snackbarState.show(
+                                "Operation completed Operation completed",
+                                LsSnackbarConfig(
+                                    type = LsSnackbarType.Error,
+                                    position = LsSnackbarPosition.TopEnd
+                                )
+                            )
+                            snackbarState.show(
+                                "Operation completed Operation completed",
+                                LsSnackbarConfig(
+                                    type = LsSnackbarType.Warning,
+                                    position = LsSnackbarPosition.TopEnd
+                                )
+                            )
+                        }) {
+                            Text("Show Snackbar")
+                        }
                     }
                 }
             }

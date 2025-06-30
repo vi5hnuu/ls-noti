@@ -40,7 +40,7 @@ dependencies {
     api(libs.androidx.material3)
     implementation(libs.androidx.animation.android)
     implementation(libs.androidx.ui)
-    implementation(libs.androidx.runtime )
+    implementation(libs.androidx.runtime)
 }
 
 afterEvaluate {

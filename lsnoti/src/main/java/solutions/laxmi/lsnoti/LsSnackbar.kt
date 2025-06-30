@@ -1,52 +1,86 @@
 package solutions.laxmi.lsnoti
 
-import android.R.interpolator.bounce
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SnackbarData
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import solutions.laxmi.lsnoti.R
 
 @Composable
 fun LsSnackbar(
-    data: SnackbarData,
-    config: LsSnackbarConfig
+    message: String,
+    config: LsSnackbarConfig,
+    backgroundColor: Color?=null,
+    iconColor: Color?=null,
+    textColor: Color?=null,
+    @DrawableRes() iconRes: Int?=null,
+    modifier: Modifier = Modifier
 ) {
-    val bgColor = when (config.type) {
+    val bgColor = backgroundColor ?: when (config.type) {
         LsSnackbarType.Success -> Color(0xFF388E3C)
         LsSnackbarType.Error -> Color(0xFFD32F2F)
         LsSnackbarType.Warning -> Color(0xFFFFA000)
         LsSnackbarType.Info -> Color(0xFF1976D2)
     }
 
-    val modifier = Modifier
-        .padding(12.dp)
-        .fillMaxWidth(0.7f) // ✅ 70% width by default
-        .wrapContentHeight()
+    val iconColor = iconColor ?: when (config.type) {
+        LsSnackbarType.Success -> Color.White
+        LsSnackbarType.Error -> Color.White
+        LsSnackbarType.Warning -> Color.White
+        LsSnackbarType.Info -> Color.White
+    }
+
+    val textColor = textColor ?: when (config.type) {
+        LsSnackbarType.Success -> Color.White
+        LsSnackbarType.Error -> Color.White
+        LsSnackbarType.Warning -> Color.White
+        LsSnackbarType.Info -> Color.White
+    }
+
+    val icon=iconRes ?: when (config.type) {
+        LsSnackbarType.Success -> R.drawable.ls_success
+        LsSnackbarType.Error -> R.drawable.ls_dangerous
+        LsSnackbarType.Warning -> R.drawable.ls_warning
+        LsSnackbarType.Info -> R.drawable.ls_info
+    }
 
     Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight().then(modifier),
+        shape = RoundedCornerShape(4.dp),
         colors = CardDefaults.cardColors(containerColor = bgColor),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
-        Text(
-            text = data.visuals.message,
-            modifier = Modifier.padding(16.dp),
-            color = Color.White,
-            style = MaterialTheme.typography.bodyMedium
-        )
+        Row(
+            modifier = Modifier.padding(horizontal = 6.dp,vertical = 12.dp),verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            IconDrawable(icon=icon, modifier = Modifier.size(28.dp), tint = iconColor)
+            Text(
+                text = message,
+                color = textColor,
+                style = MaterialTheme.typography.bodySmall,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 2,
+                softWrap = true,
+                textAlign = TextAlign.Justify
+            )
+        }
     }
 }
 

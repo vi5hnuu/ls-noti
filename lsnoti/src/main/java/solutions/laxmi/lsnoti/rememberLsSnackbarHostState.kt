@@ -10,8 +10,5 @@ import androidx.compose.runtime.remember
  */
 @Composable
 fun rememberLsSnackbarHostState(): LsSnackbarHostState {
-    val internalState = remember { SnackbarHostState() }
-    return remember(internalState) {
-        LsSnackbarHostState(internalState)
-    }
+    return remember { LsSnackbarHostState() }
 }

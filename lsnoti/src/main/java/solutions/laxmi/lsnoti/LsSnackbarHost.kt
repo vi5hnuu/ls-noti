@@ -67,12 +67,14 @@ fun LsSnackbarHost(
             Layout(
                 content = {
                     stack.forEachIndexed { index, (message, cfg) ->
-                        LsSnackbar(
+                        SwipeDismissSnackbar(
                             message = message,
                             config = cfg,
                             modifier = Modifier
                                 .shadow(elevation = 4.dp)
-                                .zIndex((index).toFloat())
+                                .zIndex((index).toFloat()),
+                            onDismiss = { state.dismiss(index) },
+                            index = index,
                         )
                     }
                 },

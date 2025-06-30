@@ -27,5 +27,11 @@ class LsSnackbarHostState internal constructor() {
 //            _messages.remove(message to config)
         }
     }
+
+    fun dismiss(index: Int) {
+        if (index in messages.indices) {
+            _messages.removeAt(index)
+        }
+    }
 }
 

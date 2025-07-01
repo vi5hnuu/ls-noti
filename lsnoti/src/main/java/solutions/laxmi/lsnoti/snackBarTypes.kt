@@ -6,7 +6,7 @@ enum class LsSnackbarType { Success, Error, Warning, Info }
 
 enum class LsSnacksPosition {
     TopStart, TopCenter, TopEnd,
-    Center,
+    Center, CenterEnd, CenterStart,
     BottomStart, BottomCenter, BottomEnd
 }
 
@@ -18,7 +18,7 @@ open class LsSnackbarData(
     open val message: String,
     open val type: LsSnackbarType = LsSnackbarType.Info,
     open val animation: LsSnackbarAnimation = LsSnackbarAnimation.Bounce,
-    open val durationMillis: Int = 3000
+    open val durationMillis: Long = 3000
 )
 
 internal class LsSnackbarConfig : LsSnackbarData {
@@ -29,7 +29,7 @@ internal class LsSnackbarConfig : LsSnackbarData {
         message: String,
         type: LsSnackbarType = LsSnackbarType.Info,
         animation: LsSnackbarAnimation = LsSnackbarAnimation.Bounce,
-        durationMillis: Int = 3000
+        durationMillis: Long = 3000
     ) : super(message, type, animation, durationMillis) {
         this.id = id
     }

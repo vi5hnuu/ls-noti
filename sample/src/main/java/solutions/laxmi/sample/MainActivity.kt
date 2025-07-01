@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                         LsSnackbarHost(
                             state = snackbarState,
                             maxStackHeightFraction = 0.7f,
-                            position = LsSnacksPosition.Center
+                            position = LsSnacksPosition.TopCenter
                         )
                     }
                 ) {i->
@@ -36,29 +36,30 @@ class MainActivity : ComponentActivity() {
                         Button(onClick = {
                             snackbarState.show(
                                 LsSnackbarData(
-                                    message = "Operation completed Operation completed",
+                                    message = "A Operation completed Operation completed",
                                     type = LsSnackbarType.Info,
-                                )
-                            )
-                            snackbarState.show(
-                                LsSnackbarData(
-                                    message = "Operation completed Operation completed",
-                                    type = LsSnackbarType.Success,
                                     durationMillis = 3000
                                 )
                             )
                             snackbarState.show(
                                 LsSnackbarData(
-                                    message = "Operation completed Operation completed",
-                                    type = LsSnackbarType.Error,
-                                    durationMillis = 5000
+                                    message = "B Operation completed Operation completed",
+                                    type = LsSnackbarType.Success,
+                                    durationMillis = 7000
                                 )
                             )
                             snackbarState.show(
                                 LsSnackbarData(
-                                    message = "Operation completed Operation completed",
+                                    message = "C Operation completed Operation completed",
+                                    type = LsSnackbarType.Error,
+                                    durationMillis = 11000
+                                )
+                            )
+                            snackbarState.show(
+                                LsSnackbarData(
+                                    message = "D Operation completed Operation completed",
                                     type = LsSnackbarType.Warning,
-                                    durationMillis = 7000
+                                    durationMillis = 15000
                                 )
                             )
                         }) {

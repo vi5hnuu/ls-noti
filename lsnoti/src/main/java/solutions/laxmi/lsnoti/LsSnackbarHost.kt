@@ -1,9 +1,7 @@
 package solutions.laxmi.lsnoti
 
-import android.R.attr.maxHeight
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,7 +21,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalDensity
+import solutions.laxmi.lsnoti.LsSnackbarHostState
+import solutions.laxmi.lsnoti.internal.SwipeDismissSnackbar
 
 @Composable
 fun LsSnackbarHost(
@@ -66,15 +65,13 @@ fun LsSnackbarHost(
         ) {
             Layout(
                 content = {
-                    stack.forEachIndexed { index, (message, cfg) ->
+                    stack.forEachIndexed { index, cfg ->
                         SwipeDismissSnackbar(
-                            message = message,
                             config = cfg,
                             modifier = Modifier
                                 .shadow(elevation = 4.dp)
                                 .zIndex((index).toFloat()),
-                            onDismiss = { state.dismiss(index) },
-                            index = index,
+                            onDismiss = { state.dismiss(cfg.id) },
                         )
                     }
                 },

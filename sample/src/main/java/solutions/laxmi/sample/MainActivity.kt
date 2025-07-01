@@ -9,7 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import solutions.laxmi.lsnoti.LsSnackbarConfig
+import solutions.laxmi.lsnoti.LsSnackbarData
 import solutions.laxmi.lsnoti.LsSnackbarHost
 import solutions.laxmi.lsnoti.LsSnackbarType
 import solutions.laxmi.lsnoti.LsSnacksPosition
@@ -35,27 +35,30 @@ class MainActivity : ComponentActivity() {
                     Box(modifier = Modifier.padding(i)){
                         Button(onClick = {
                             snackbarState.show(
-                                "Operation completed Operation completed",
-                                LsSnackbarConfig(
+                                LsSnackbarData(
+                                    message = "Operation completed Operation completed",
                                     type = LsSnackbarType.Info,
                                 )
                             )
                             snackbarState.show(
-                                "Operation completed Operation completed",
-                                LsSnackbarConfig(
+                                LsSnackbarData(
+                                    message = "Operation completed Operation completed",
                                     type = LsSnackbarType.Success,
+                                    durationMillis = 3000
                                 )
                             )
                             snackbarState.show(
-                                "Operation completed Operation completed",
-                                LsSnackbarConfig(
+                                LsSnackbarData(
+                                    message = "Operation completed Operation completed",
                                     type = LsSnackbarType.Error,
+                                    durationMillis = 5000
                                 )
                             )
                             snackbarState.show(
-                                "Operation completed Operation completed",
-                                LsSnackbarConfig(
+                                LsSnackbarData(
+                                    message = "Operation completed Operation completed",
                                     type = LsSnackbarType.Warning,
+                                    durationMillis = 7000
                                 )
                             )
                         }) {

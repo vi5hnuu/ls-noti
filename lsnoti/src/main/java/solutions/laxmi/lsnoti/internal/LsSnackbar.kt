@@ -1,4 +1,4 @@
-package solutions.laxmi.lsnoti
+package solutions.laxmi.lsnoti.internal
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
@@ -19,11 +19,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import solutions.laxmi.lsnoti.LsSnackbarConfig
+import solutions.laxmi.lsnoti.LsSnackbarType
 import solutions.laxmi.lsnoti.R
 
 @Composable
-fun LsSnackbar(
-    message: String,
+internal fun LsSnackbar(
     config: LsSnackbarConfig,
     backgroundColor: Color?=null,
     iconColor: Color?=null,
@@ -70,9 +71,9 @@ fun LsSnackbar(
         Row(
             modifier = Modifier.padding(horizontal = 6.dp,vertical = 12.dp),verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            IconDrawable(icon=icon, modifier = Modifier.size(28.dp), tint = iconColor)
+            IconDrawable(icon = icon, modifier = Modifier.size(28.dp), tint = iconColor)
             Text(
-                text = message,
+                text = config.message,
                 color = textColor,
                 style = MaterialTheme.typography.bodySmall,
                 overflow = TextOverflow.Ellipsis,

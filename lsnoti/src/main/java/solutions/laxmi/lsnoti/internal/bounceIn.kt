@@ -1,10 +1,9 @@
-package solutions.laxmi.lsnoti
+package solutions.laxmi.lsnoti.internal
 
 import androidx.compose.animation.core.*
 import androidx.compose.animation.*
-import androidx.compose.runtime.*
 
-fun bounceIn(): EnterTransition {
+internal fun bounceIn(): EnterTransition {
     return scaleIn(
         initialScale = 0.5f,
         animationSpec = keyframes {

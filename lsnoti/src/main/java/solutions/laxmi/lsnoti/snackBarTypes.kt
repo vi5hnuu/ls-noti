@@ -1,5 +1,7 @@
 package solutions.laxmi.lsnoti
 
+import java.util.UUID
+
 enum class LsSnackbarType { Success, Error, Warning, Info }
 
 enum class LsSnacksPosition {
@@ -12,8 +14,29 @@ enum class LsSnackbarAnimation {
     Slide, Bounce // Add more later
 }
 
-data class LsSnackbarConfig(
-    val type: LsSnackbarType = LsSnackbarType.Info,
-    val animation: LsSnackbarAnimation = LsSnackbarAnimation.Bounce,
-    val durationMillis: Int = 3000
+open class LsSnackbarData(
+    open val message: String,
+    open val type: LsSnackbarType = LsSnackbarType.Info,
+    open val animation: LsSnackbarAnimation = LsSnackbarAnimation.Bounce,
+    open val durationMillis: Int = 3000
 )
+
+internal class LsSnackbarConfig : LsSnackbarData {
+    val id: String
+
+    constructor(
+        id: String,
+        message: String,
+        type: LsSnackbarType = LsSnackbarType.Info,
+        animation: LsSnackbarAnimation = LsSnackbarAnimation.Bounce,
+        durationMillis: Int = 3000
+    ) : super(message, type, animation, durationMillis) {
+        this.id = id
+    }
+
+    companion object{
+        fun fromSnackbarData(data: LsSnackbarData):LsSnackbarConfig{
+            return LsSnackbarConfig(id= UUID.randomUUID().toString(), message = data.message,type=data.type, animation = data.animation, durationMillis =data.durationMillis);
+        }
+    }
+}

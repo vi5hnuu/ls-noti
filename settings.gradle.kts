@@ -11,6 +11,7 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven(url = "https://jitpack.io")
     }
 }
 dependencyResolutionManagement {
@@ -23,5 +24,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "ls-noti"
-include(":lsnoti")
 include(":sample")

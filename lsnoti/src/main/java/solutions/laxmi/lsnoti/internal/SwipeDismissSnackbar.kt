@@ -28,8 +28,11 @@ internal fun SwipeDismissSnackbar(
     val dismissState = rememberSwipeToDismissBoxState(
         positionalThreshold = { it * 0.5f }, // 50% of its width
         confirmValueChange = {value->
-            onDismiss(SnackbarCancellation(id=config.id, type = CancellationType.SWIPE))
-            true
+            if(value=== SwipeToDismissBoxValue.Settled) false;
+            else {
+                onDismiss(SnackbarCancellation(id=config.id, type = CancellationType.SWIPE))
+                true
+            }
         }
     )
 

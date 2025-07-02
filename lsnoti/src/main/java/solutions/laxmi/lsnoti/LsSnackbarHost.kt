@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.key
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalConfiguration
@@ -30,6 +31,7 @@ fun LsSnackbarHost(
     state: LsSnackbarHostState,
     modifier: Modifier = Modifier,
     maxStackHeightFraction: Float = 0.7f,
+    maxStackWidthFraction: Float = 0.7f,
     position: LsSnacksPosition = LsSnacksPosition.TopCenter,
     overlapPx: Int = 12
 ) {
@@ -67,7 +69,7 @@ fun LsSnackbarHost(
     ) {
         Box(
             modifier = Modifier
-                .fillMaxWidth(0.7f)
+                .fillMaxWidth(maxStackWidthFraction)
                 .sizeIn(minHeight = 0.dp, maxHeight = screenHeight * maxStackHeightFraction)
                 .padding(8.dp)
                 .border(width = 1.dp, color = Color.Transparent, shape = RoundedCornerShape(8.dp))
@@ -87,7 +89,7 @@ fun LsSnackbarHost(
                         }
                     }
                 },
-                modifier = Modifier
+                modifier = Modifier.padding(4.dp)
             ) { measurables, constraints ->
                 val placeables = measurables.map { it.measure(constraints) }
                 val totalHeight = placeables.sumOf { it.height } - (placeables.size-1)*overlapPx

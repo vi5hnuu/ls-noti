@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     id("org.jetbrains.kotlin.plugin.compose") version "2.0.21"
+
+    `maven-publish`
 }
 
 android {
@@ -33,6 +35,13 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
@@ -44,20 +53,18 @@ dependencies {
 }
 
 afterEvaluate {
-    configurations.all {
-        resolutionStrategy.eachDependency {
-            if (requested.group == "androidx.compose" && requested.name == "compose-bom") {
-                val minRequiredVersion = "2024.05.00"
-                val usedVersion = requested.version ?: "unspecified"
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
 
-                if (usedVersion != "unspecified" && usedVersion < minRequiredVersion) {
-                    throw GradleException("""
-                        ❌ ERROR: Your project is using Compose BOM $usedVersion
-                        🚨 ls-noti requires Compose BOM ≥ $minRequiredVersion
+                groupId = "com.github.vi5hnuu"
+                artifactId = "lsnoti"
+                version = "1.0.0" // or use the Git tag version
 
-                        👉 Please update your BOM:
-                           implementation(platform("androidx.compose:compose-bom:$minRequiredVersion"))
-                    """.trimIndent())
+                pom {
+                    name.set("LsNoti")
+                    description.set("Elegant Jetpack Compose snackbar stack library with swipe-to-dismiss.")
                 }
             }
         }

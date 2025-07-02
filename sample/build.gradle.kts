@@ -51,5 +51,5 @@ dependencies {
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(project(":lsnoti"))
+    implementation("com.github.vi5hnuu:lsnoti:1.0.0")
 }

@@ -37,7 +37,8 @@ android {
     }
 
     publishing {
-        singleVariant("release") {
+        multipleVariants {
+            allVariants() // allows publishing of both debug and release
             withSourcesJar()
             withJavadocJar()
         }
@@ -55,13 +56,22 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
+            create<MavenPublication>("debug") {
+                from(components["debug"])
+                groupId = "com.github.vi5hnuu"
+                artifactId = "ls-noti-debug"
+                version = "1.0.0-SNAPSHOT"
+                pom {
+                    name.set("LsNoti Debug")
+                    description.set("Debug variant for testing LsNoti.")
+                }
+            }
+
             create<MavenPublication>("release") {
                 from(components["release"])
-
                 groupId = "com.github.vi5hnuu"
-                artifactId = "lsnoti"
+                artifactId = "ls-noti"
                 version = "1.0.0"
-
                 pom {
                     name.set("LsNoti")
                     description.set("Elegant Jetpack Compose snackbar stack library with swipe-to-dismiss.")
@@ -70,3 +80,4 @@ afterEvaluate {
         }
     }
 }
+

@@ -60,7 +60,7 @@ afterEvaluate {
 
                 groupId = "com.github.vi5hnuu"
                 artifactId = "lsnoti"
-                version = "v1.0.0"
+                version = "1.0.0"
 
                 pom {
                     name.set("LsNoti")

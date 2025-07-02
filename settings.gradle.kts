@@ -24,4 +24,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "ls-noti"
-include(":sample")
+include(":lsnoti", ":sample")
+
